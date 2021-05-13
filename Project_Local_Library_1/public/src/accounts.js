@@ -29,7 +29,7 @@ function getBooksPossessedByAccount(account, books, authors) {
       console.log(writer)
       return book.borrows.some(borrow => borrow.id === account.id && borrow.returned == false)
     })
-return getBooksBorrowing
+return getBooksBorrowing;
 }
 
 module.exports = {

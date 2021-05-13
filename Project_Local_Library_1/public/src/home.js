@@ -5,7 +5,7 @@ function getTotalBooksCount(books) {
 }
 
 function getTotalAccountsCount(accounts) {
-  return accounts.map((account) => accounsts.id).length
+  return accounts.map((account) => accounts.id).length
 }
 
 function getBooksBorrowedCount(books) {
