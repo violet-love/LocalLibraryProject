@@ -17,29 +17,33 @@ function getBooksBorrowedCount(books) {
 
 
 
+// helper
+function _sortObjectByValues(obj) {
+	const keys = Object.keys(obj);
+	return keys.sort((keyA, keyB) => {
+		if (obj[keyA] > obj[keyB]) {
+			return -1;
+		} else if (obj[keyB] > obj[keyA]) {
+			return 1;
+		} else {
+			return 0;
+		}
+	});
+}
+
 function getMostCommonGenres(books) {
+	const count = books.reduce((acc, { genre }) => {
+		if (acc[genre]) {
+			acc[genre] += 1;
+		} else {
+			acc[genre] = 1;
+		}
 
-const genres = books.reduce((acc, book) => {
-  if(!acc[book.genre]){
-    acc[book.genre] = 1;
-  } else {
-    acc[book.genre] = acc[book.genre]+1;
-  }
-  return acc
-}, {})
+		return acc;
+	}, {});
 
-return Object.keys(genres)
-  .reduce((acc, genre) => {
-    acc.push({
-      name:genre,
-      count: genres[genre]
-    })
-    return acc
-  }, [])
-
-.sort((a,b) => a.count < b.count ? 1: -1)
-.slice(0,5)
-
+	const sorted = _sortObjectByValues(count); // called here
+	return sorted.map((name) => ({ name, count: count[name] })).slice(0, 5);
 }
 
 function getMostPopularBooks(books) {
